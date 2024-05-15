@@ -49,7 +49,7 @@ class Queue {
 
 
         this.head = this.head.next
-       console.log(currVal.value)
+       
 
         this.length--
 
