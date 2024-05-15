@@ -36,6 +36,16 @@ class DoublyLinkedList {
 
     addToTail(val) {
         // Add node of val to tail of linked list
+        let newNode = new DoublyLinkedNode(val)
+        this.length++
+        if (!this.head) {
+            this.head = newNode
+            this.tail = newNode
+            return
+        }
+        this.tail.next = newNode;
+        newNode.prev = this.tail;
+        this.tail = newNode
 
         // Your code here
 
@@ -72,24 +82,21 @@ class DoublyLinkedList {
 
     removeFromTail() {
         // Remove node at tail
-        if(!this.head){
-            return undefined
+        if (!this.tail) {
+            return
         }
-        let curr = this.head;
-        // let prev = null
-        // while(curr.next){
-        //     prev = curr
-        //     curr = curr.next
-        // }
-        if(this.tail.prev){
-            this.tail.prev.next = null
-        }else{
-            this.head = null
-        }
-        this.length--
-        
-        return curr.value
 
+        let currTail = this.tail
+        this.tail = this.tail.prev
+
+        if (this.tail) {
+            this.tail.next = null
+        }
+
+
+
+        this.length--
+        return currTail.value
 
         // Your code here
 
@@ -111,7 +118,11 @@ class DoublyLinkedList {
 
     peekAtTail() {
         // Return value of tail node
-
+        if (!this.head) {
+            return undefined
+        } else {
+            return this.tail.value
+        }
         // Your code here
 
         // Write your hypothesis on the time complexity of this method here
